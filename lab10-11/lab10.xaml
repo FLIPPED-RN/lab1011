@@ -9,8 +9,9 @@
     <Grid>
         <StackPanel>
             <TextBlock Text="Content of f1.txt:" FontWeight="Bold" Margin="10"/>
-            <TextBox x:Name="FileContentTextBox" Margin="10" Height="150" IsReadOnly="True" TextWrapping="Wrap"/>
+            <TextBox x:Name="FileContentTextBox" Margin="10" Height="150" IsReadOnly="False" TextWrapping="Wrap"/>
             <Button Content="Load File f1" Click="LoadFileButton_Click" Margin="10"/>
+            <Button Content="Save Changes to f1" Click="SaveFileButton_Click" Margin="10"/>
             <Button Content="Copy to File f2" Click="CopyFileButton_Click" Margin="10"/>
             <TextBlock x:Name="StatusTextBlock" Margin="10"/>
         </StackPanel>

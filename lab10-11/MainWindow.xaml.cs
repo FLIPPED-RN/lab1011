@@ -29,6 +29,6 @@ public partial class MainWindow : Window
 
     private void btLab11_Click(object sender, RoutedEventArgs e)
     {
-        // mainFrame.Navigate(new lab11());
+        mainFrame.Navigate(new lab11());
     }
 }

@@ -3,6 +3,9 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 
+//НАЗАРОВ РУСЛАН 23-ИСП-2/1
+//СРЕДНИЙ УРОВЕНЬ 10 ЗАДАНИЕ
+
 namespace lab10_11
 {
     public partial class lab10 : Page
@@ -16,11 +19,11 @@ namespace lab10_11
             InitializeComponent();
         }
 
-        private void LoadFileButton_Click(object sender, RoutedEventArgs e)
+        private async void LoadFileButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                string content = File.ReadAllText(File1Path);
+                string content = await File.ReadAllTextAsync(File1Path);
                 FileContentTextBox.Text = content;
                 StatusTextBlock.Text = "File f1.txt loaded successfully.";
             }
@@ -30,22 +33,27 @@ namespace lab10_11
             }
         }
 
-        private void CopyFileButton_Click(object sender, RoutedEventArgs e)
+        private async void SaveFileButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                // Чтение содержимого файла f1
-                string content = File.ReadAllText(File1Path);
+                await File.WriteAllTextAsync(File1Path, FileContentTextBox.Text);
+                StatusTextBlock.Text = "Changes saved to f1.txt successfully.";
+            }
+            catch (Exception ex)
+            {
+                StatusTextBlock.Text = "Error saving changes: " + ex.Message;
+            }
+        }
 
-                // Запись содержимого во временный файл h
-                File.WriteAllText(TempFilePath, content);
-
-                // Чтение содержимого временного файла h
-                string tempContent = File.ReadAllText(TempFilePath);
-
-                // Запись содержимого во второй файл f2
-                File.WriteAllText(File2Path, tempContent);
-
+        private async void CopyFileButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string content = await File.ReadAllTextAsync(File1Path);
+                await File.WriteAllTextAsync(TempFilePath, content);
+                string tempContent = await File.ReadAllTextAsync(TempFilePath);
+                await File.WriteAllTextAsync(File2Path, tempContent);
                 StatusTextBlock.Text = "Content copied from f1.txt to f2.txt successfully.";
             }
             catch (Exception ex)
